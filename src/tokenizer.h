@@ -5,8 +5,14 @@
 /* Return true (non-zero) if c is a whitespace characer
    ('\t' or ' ').  
    Zero terminators are not printable (therefore false) */
-int space_char(char c);
+int  space_char(char c){
+  if(c != ' ' || '\t' || 0){
 
+    return 0;
+  }
+  else
+    return 1;
+}
 /* Return true (non-zero) if c is a non-whitespace 
    character (not tab or space).  
    Zero terminators are not printable (therefore false) */ 
