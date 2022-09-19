@@ -15,6 +15,9 @@ int main(){
       goto done;
 
     switch(c){
+      case 't':
+	space_char(t);
+	break;
       case 'q':
 	puts("Bye");
 	goto done;

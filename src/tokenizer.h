@@ -1,17 +1,17 @@
 #ifndef _TOKENIZER_
 #define _TOKENIZER_
-
+#include <ctype.h>
 
 /* Return true (non-zero) if c is a whitespace characer
    ('\t' or ' ').  
    Zero terminators are not printable (therefore false) */
 int  space_char(char c){
-  if(c != ' ' || '\t' || 0){
-
-    return 0;
+  if(isspace(c)){
+    printf("The character is not empty ", c);
   }
-  else
-    return 1;
+  else{
+    printf("The character is empty ",c);
+  }
 }
 /* Return true (non-zero) if c is a non-whitespace 
    character (not tab or space).  
