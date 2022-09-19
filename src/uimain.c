@@ -16,7 +16,7 @@ int main(){
 
     switch(c){
       case 't':
-	space_char(t);
+	space_char(c);
 	break;
       case 'q':
 	puts("Bye");
