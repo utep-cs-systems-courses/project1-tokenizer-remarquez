@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "tokenizer.h"
+#include "tokenizer.c"
+#include "history.c"
 
 int main(){
   

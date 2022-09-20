@@ -1,6 +1,6 @@
 
 
-OBJS= uimain.o
+OBJS= uimain.o 
 
 CFLAGS=-g -O3 # -g for debug, -O3 for optimization
 
@@ -13,7 +13,7 @@ all: completed
 completed: $(OBJS)
 	cc -o completed $(CFLAGS) $(OBJS)
 
-$(OBJS): history.h tokenizer.h
+$(OBJS): history.c tokenizer.c
 
 
 clean:
