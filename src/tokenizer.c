@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "tokenizer.h"
 
 int space_char(char c){
     if(c = '\t' || ' ' && c != 0){
@@ -10,11 +11,44 @@ int space_char(char c){
   }
 
 int non_space_char(char c){
-  if(c != '\t' || ' ' && c != 0){
+   if(c != '\t' || ' ' && c != 0){
     return 1;
   } 
     else{
       return 0;
     }
   }
+ 
+int non_space_char(char c);
+/* Returns a pointer to the first character of the next 
+   space-separated word in zero-terminated str.  Return a zero pointer if 
+   str does not contain any words. */
+char *word_start(char *str); 
+
+/* Returns a pointer terminator char following *word */
+char *word_terminator(char *word);
+
+/* Counts the number of words in the string argument. */
+int count_words(char *str);
+
+/* Returns a fresly allocated new zero-terminated string 
+   containing <len> chars from <inStr> */
+char *copy_str(char *inStr, short len);
+
+/* Returns a freshly allocated zero-terminated vector of freshly allocated 
+   space-separated tokens from zero-terminated str.
+
+   For example, tokenize("hello world string") would result in:
+     tokens[0] = "hello"
+     tokens[1] = "world"
+     tokens[2] = "string" 
+     tokens[3] = 0
+*/
+char **tokenize(char* str);
+
+/* Prints all tokens. */
+void print_tokens(char **tokens);
+
+/* Frees all tokens and the vector containing themx. */
+void free_tokens(char **tokens);
 
