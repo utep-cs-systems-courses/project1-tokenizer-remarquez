@@ -5,24 +5,10 @@
 int main(){
   
   puts("Welcome to the tokenizer");
-
-
-
-    fputs("Select 't' to tokenize or 'q' to exit\n",stdout);
-    fflush(stdout);
-    int c;
-    while ((c = getchar()) == '\n');
-    if (c == EOF)
-      goto done;
-    switch (c) {
-    case 's':
-      puts("You selected space char:");
-      gets(a);
-     space_char(a);
-      break;
-    default:
-      printf("Unrecognized option '%c', please try again!\n", c);
-    }
- done: 
-    return 0;
+  char key = 'a';
+  printf("%d\n",space_char(key));
+  char *test = "   hello ";
+  printf("%c\n", *word_start(*test));
+  
+  return 0;
 }

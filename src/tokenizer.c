@@ -2,7 +2,7 @@
 #include "tokenizer.h"
 
 int space_char(char c){
-    if(c = '\t' || ' ' && c != 0){
+  if(c == '\t' || c == ' ' || c == '\0'){
     return 1;
   } 
     else{
@@ -11,24 +11,28 @@ int space_char(char c){
   }
 
 int non_space_char(char c){
-   if(c != '\t' || ' ' && c != 0){
+   if(c != '\t' && c != ' ' &&  c != '\0'){
     return 1;
   } 
     else{
       return 0;
     }
   }
- 
-int non_space_char(char c);
-/* Returns a pointer to the first character of the next 
-   space-separated word in zero-terminated str.  Return a zero pointer if 
-   str does not contain any words. */
-char *word_start(char *str); 
 
-/* Returns a pointer terminator char following *word */
+char *word_start(char *str){ 
+  while(*str != '\0'){
+    if(non_space_char(*str)){
+      return str;
+    }
+    else{
+     str++;
+    }
+ }
+}
+
 char *word_terminator(char *word);
 
-/* Counts the number of words in the string argument. */
+
 int count_words(char *str);
 
 /* Returns a fresly allocated new zero-terminated string 
