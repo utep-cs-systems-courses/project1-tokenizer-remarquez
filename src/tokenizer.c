@@ -19,15 +19,11 @@ int non_space_char(char c){
     }
   }
 
-char *word_start(char *str){ 
-  while(*str != '\0'){
-    if(non_space_char(*str)){
-      return str;
+char *word_start(char *str){
+  while(space_char(*(str+1))){
+      str++;
     }
-    else{
-     str++;
-    }
- }
+    return str;
 }
 
 char *word_terminator(char *word);
