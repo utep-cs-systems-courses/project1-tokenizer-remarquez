@@ -7,9 +7,10 @@ int main(){
   puts("Welcome to the tokenizer");
   char key = 'a';
   printf("%d\n",space_char(key));
-  char *test = "  h ello ";
-  *word_start(test);
-  printf("%c\n",*test);
+  char test[] = "  hello ";
+  char *test2 = test;
+  word_start(test2);
+  
   
   return 0;
 }

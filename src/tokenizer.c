@@ -20,10 +20,20 @@ int non_space_char(char c){
   }
 
 char *word_start(char *str){
-  while(space_char(*(str+1))){
-      str++;
+  for(int i = 0; str[i] != '\0'; i++){
+  if(space_char(*str)){
+    str++;
+    continue;
     }
+  if(!space_char(*str)){
+    printf("%c\n",*(str));
+    break;
+  }
+  else{
+    str ='\0';
     return str;
+  }
+}
 }
 
 char *word_terminator(char *word);
