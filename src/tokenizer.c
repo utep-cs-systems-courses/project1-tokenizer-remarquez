@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "tokenizer.h"
-
+#include <string.h>
 int space_char(char c){
   if(c == '\t' || c == ' ' || c == '\0'){
     return 1;
@@ -20,31 +21,52 @@ int non_space_char(char c){
   }
 
 char *word_start(char *str){
-  for(int i = 0; str[i] != '\0'; i++){
-  if(space_char(*str)){
-    str++;
-    continue;
+  if(*str == '\0'){
+    return 0;
     }
-  if(!space_char(*str)){
-    printf("%c\n",*(str));
-    break;
+  while(space_char(*str)){
+    str++;
   }
-  else{
-    str ='\0';
-    return str;
-  }
-}
+  return str;
 }
 
-char *word_terminator(char *word);
+char *word_terminator(char *word){
+  if(*word == '\0'){
+    return 0;
+    }
+  while(non_space_char(*word)){
+    word++;
+  }
+  return word;
+}
 
 
-int count_words(char *str);
+int count_words(char *str){
+  int cw = 0;
+  
+  for(int i = 0; str[i] != '\0'; i++){
+    if(str[i] == ' ' && str[i+1] != ' '){
+      cw++;
+    }
+  }
+  return cw;
+}
 
-/* Returns a fresly allocated new zero-terminated string 
-   containing <len> chars from <inStr> */
-char *copy_str(char *inStr, short len);
-
+char *copy_str(char *inStr, short len){
+  char *cs;
+  len = strlen(inStr)+1;
+  if(inStr = '\0'){
+    return 0;
+  }
+  cs = malloc(sizeof *cs * (len));
+  if(!cs){
+    return 0;
+  }
+  while(*inStr){
+    *cs++ = *inStr++;
+  }
+  return cs;
+}
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
    space-separated tokens from zero-terminated str.
 
