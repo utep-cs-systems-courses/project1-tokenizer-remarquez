@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokenizer.h"
-#include <string.h>
+
 int space_char(char c){
   if(c == '\t' || c == ' ' || c == '\0'){
     return 1;
@@ -53,34 +53,63 @@ int count_words(char *str){
 }
 
 char *copy_str(char *inStr, short len){
-  char *cs;
-  len = strlen(inStr)+1;
-  if(inStr = '\0'){
-    return 0;
+  char *cs = (char*)malloc(sizeof(char) * (len+1));
+  int i;
+  for (i = 0; i < len; i++){
+    *(cs+i) = *(inStr+i);
   }
-  cs = malloc(sizeof *cs * (len));
-  if(!cs){
-    return 0;
-  }
-  while(*inStr){
-    *cs++ = *inStr++;
-  }
+  *(cs+i) = '\0';
+  
   return cs;
 }
-/* Returns a freshly allocated zero-terminated vector of freshly allocated 
-   space-separated tokens from zero-terminated str.
 
-   For example, tokenize("hello world string") would result in:
-     tokens[0] = "hello"
-     tokens[1] = "world"
-     tokens[2] = "string" 
-     tokens[3] = 0
-*/
-char **tokenize(char* str);
+char **tokenize(char* str){
+ 
+  int a = 0;
+  int i;
+  int b = 0;
+  int p = 1;
+  char *cs;
+  char *temp;
+  while(p){
+    char *ws = word_start(str);
+    char *wt = word_terminator(str);
+    for(int i = 0; str[i] != '\0'; i++){
+    if(str[a] == ws[b]){
+      temp = &str[a];
+       printf("%c " "%c",str[a],ws[b]);
+    }
+    else{
+      a+1;
+    }
+      if(str[a] == wt[b]){
+	 printf("%c\n""%c\n",str[a],ws[b]);
+	 b+1;
+        cs = copy_str(str,a);
+	i = wt[b];
+      }
+    }
+    p=0;
+  } 
+  short size = sizeof(str)/sizeof(str[0]);
+  int** arr = malloc(size * sizeof(char*));
+  for(int i = 0; i < size;i++){
+    arr[i] = malloc(size * sizeof(char*));
+  }
+  for(int i = 0; i < size; i++){
+    for(int j = 0; j < size; j++){
+      //arr[i][j] = str[i];
+  }
+}
+ 
+  
+  int cw = count_words(str);
+  return 0;  
+}
 
-/* Prints all tokens. */
+
 void print_tokens(char **tokens);
 
-/* Frees all tokens and the vector containing themx. */
+
 void free_tokens(char **tokens);
 
