@@ -45,7 +45,7 @@ int count_words(char *str){
   int cw = 0;
   
   for(int i = 0; str[i] != '\0'; i++){
-    if(str[i] == ' ' && str[i+1] != ' '){
+    if(str[i] == ' ' && str[i-1] != ' '){
       cw++;
     }
   }
@@ -64,52 +64,53 @@ char *copy_str(char *inStr, short len){
 }
 
 char **tokenize(char* str){
- 
-  int a = 0;
-  int i;
-  int b = 0;
-  int p = 1;
-  char *cs;
-  char *temp;
-  while(p){
-    char *ws = word_start(str);
-    char *wt = word_terminator(str);
-    for(int i = 0; str[i] != '\0'; i++){
-    if(str[a] == ws[b]){
-      temp = &str[a];
-       printf("%c " "%c",str[a],ws[b]);
-    }
-    else{
-      a+1;
-    }
-      if(str[a] == wt[b]){
-	 printf("%c\n""%c\n",str[a],ws[b]);
-	 b+1;
-        cs = copy_str(str,a);
-	i = wt[b];
-      }
-    }
-    p=0;
-  } 
-  short size = sizeof(str)/sizeof(str[0]);
-  int** arr = malloc(size * sizeof(char*));
-  for(int i = 0; i < size;i++){
-    arr[i] = malloc(size * sizeof(char*));
-  }
-  for(int i = 0; i < size; i++){
-    for(int j = 0; j < size; j++){
-      //arr[i][j] = str[i];
-  }
-}
- 
-  
   int cw = count_words(str);
-  return 0;  
+  char** arr = (char**)malloc(sizeof(char) * cw);
+  char *cs = copy_str(str,cw); 
+  char temp;
+  int a = 0;
+  int b = 0;
+  while(str[a] != '\0'){
+      a++;      
+      }
+  for(int i = 0; i < a; i++){
+    if(i == 0){
+      arr[b] = &str[i];
+      temp = str[i]; 
+      b++;
+   }
+    else{
+      if(space_char(str[i])){
+	temp = str[i];
+	str[i] = '\0';
+	
+      }
+      else if(non_space_char(str[i]) && space_char(temp)){
+	arr[b] = &str[i];
+	temp = str[i];
+	b++;
+      }     
+    }
+  }
+  return arr;
 }
 
 
-void print_tokens(char **tokens);
+
+void print_tokens(char **tokens){
+ for(int i = 0; tokens[i] != 0; i++){
+	printf("%s \n",tokens[i]);
+      }
+}
 
 
-void free_tokens(char **tokens);
+void free_tokens(char **tokens){
+  char *token = tokens[0];
+  for(int i = 0; token[i] != '\0'; i++){
+    free(tokens[i]);
+  }
+  free(tokens);
+  printf("Memory is free");
+}
+
 

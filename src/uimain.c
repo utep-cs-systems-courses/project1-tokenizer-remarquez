@@ -5,12 +5,12 @@
 
 int main(){
   puts("Welcome to the tokenizer");
-  char test[] = "hello world string  ";
+  char test[] = "hello world string";
   char *test2 = test;
-  char *str = word_start(test2);
-  printf("%c\n",str[0]);
   char **str1 = tokenize(test2);
-  printf("%c\n",str1[0]);
+  print_tokens(str1);
+  free_tokens(str1);
+   
   
   return 0;
 }
