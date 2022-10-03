@@ -64,9 +64,9 @@ char *copy_str(char *inStr, short len){
 }
 
 char **tokenize(char* str){
+
   int cw = count_words(str);
-  char** arr = (char**)malloc(sizeof(char) * cw);
-  char *cs = copy_str(str,cw); 
+  char** arr = (char**)malloc(sizeof(char) * cw); 
   char temp;
   int a = 0;
   int b = 0;
