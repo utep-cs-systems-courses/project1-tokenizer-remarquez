@@ -1,51 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "history.h"
-
-typedef struct s_Item {
-  int id;
-  char *str;
-  struct s_Item *next;
-}Item;
-
-typedef struct s_List {
-  struct s_Item *root;
-}List;
+#include "tokenizer.h"
 
 
 List* init_history(){
-  Item *list;
-  Item *cn;
-  list =(Item *)malloc(sizeof(Item));
-  cn = list;
-  
+  List *h = NULL;
+  h = malloc(sizeof(List));;
+  return h;
 }
 
 
 void add_history(List *list, char *str){
-  Item *nn;
-  nn = (Item*)malloc(sizeof(Item));
-  Item *cn = list;
-  while(cn != NULL && cn->next != NULL){
-    cn = cn->next;
-  }
-  nn->id = *str;
-  nn->next = NULL;
-  if(cn != NULL){
-    cn->next = nn;
-  }
-  else{
-    list = nn;
-  }
+   Item * nn = (Item*)malloc(sizeof(Item));
+   Item *temp = list->root;
+   nn->str = str;
+   if(list->root == NULL){
+     nn->id = 1;
+     temp = nn;
+   }
+   else{
+     Item *h = temp;
+     nn->id = 1;
+
+     while(h->next != NULL){
+       nn->id += 1;
+       h = h->next;
+     }
+     h->next = nn;
+     nn->id += 1;
+   }
 }
-/*
-char *get_history(List *list, int id);
+
+char *get_history(List *list, int id){
+  Item *nn = list->root;
+  char *i = " ";
+  while(list != NULL){
+    if(nn->id == id){
+      i = nn->str;
+      return i;      
+    }
+    nn = nn->next;
+  }
+  return i;
+}
 
 
-void print_history(List *list);
+void print_history(List *list){
+ int i = 1;
+ Item *temp = list->root;
+ if(list == NULL){
+ printf("Its Empty\n");
+ return;
+}
+printf("Linked list: ");
+ while(list != NULL){  
+  printf("[%d] %s \n",i, temp->str);
+  temp = temp->next;
+  i++;
+}
 
 
-void free_history(List *list);*/
+
+void free_history(List *list){
+  Item *temp = list->root;
+  while(list != NULL){
+   temp = temp->next;
+   free(temp);
+   }
+  free(list);
+}
+}
+
+
 
 
 
