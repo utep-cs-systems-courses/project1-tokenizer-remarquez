@@ -5,29 +5,34 @@
 
 
 List* init_history(){
-  List *h = NULL;
-  h = malloc(sizeof(List));;
+  List *h;
+  h = malloc(sizeof(List));
+  h->root = NULL;
   return h;
 }
 
 
 void add_history(List *list, char *str){
    Item * nn = (Item*)malloc(sizeof(Item));
-   Item *temp = list->root;
-   nn->str = str;
-   if(list->root == NULL){
-     nn->id = 1;
-     temp = nn;
+   int a = 0;
+   while(str[a] != '\0'){
+     a++;
+     
    }
-   else{
-     Item *h = temp;
+   nn->str = copy_str(str,a);
+   
+   if (list->root == NULL) {
+     list->root = nn;
      nn->id = 1;
-
-     while(h->next != NULL){
+   }
+   else {
+     Item *temp = list->root;
+     
+     while(temp->next != NULL){
        nn->id += 1;
-       h = h->next;
+       temp = temp->next;
      }
-     h->next = nn;
+     temp->next = nn;
      nn->id += 1;
    }
 }
@@ -47,14 +52,14 @@ char *get_history(List *list, int id){
 
 
 void print_history(List *list){
- int i = 1;
- Item *temp = list->root;
+  int i = 1;
+  Item *temp = list->root;
  if(list == NULL){
- printf("Its Empty\n");
- return;
-}
-printf("Linked list: ");
- while(list != NULL){  
+   printf("Its Empty\n");
+   return;
+ }
+ printf("Linked list: \n");
+ while(temp != NULL){  
   printf("[%d] %s \n",i, temp->str);
   temp = temp->next;
   i++;

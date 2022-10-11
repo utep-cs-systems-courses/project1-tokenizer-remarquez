@@ -83,7 +83,6 @@ char **tokenize(char* str){
       if(space_char(str[i])){
 	temp = str[i];
 	str[i] = '\0';
-	
       }
       else if(non_space_char(str[i]) && space_char(temp)){
 	arr[b] = &str[i];
@@ -98,9 +97,9 @@ char **tokenize(char* str){
 
 
 void print_tokens(char **tokens){
- for(int i = 0; tokens[i] != 0; i++){
-	printf("%s \n",tokens[i]);
-      }
+   for(int i = 0;*tokens[i] != '\0';i++){
+     printf("%s\n",tokens[i]);
+    }
 }
 
 
