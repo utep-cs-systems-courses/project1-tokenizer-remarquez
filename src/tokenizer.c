@@ -3,21 +3,19 @@
 #include "tokenizer.h"
 
 int space_char(char c){
-  if(c == '\t' || c == ' ' || c == '\0'){
+  if(c == '\t' || c == ' '){
     return 1;
   } 
-    else{
       return 0;
-    }
+    
   }
 
 int non_space_char(char c){
-   if(c != '\t' && c != ' ' &&  c != '\0'){
+  if(!space_char(c) &&  c != '\0'){
     return 1;
   } 
-    else{
+ 
       return 0;
-    }
   }
 
 char *word_start(char *str){
@@ -44,10 +42,11 @@ char *word_terminator(char *word){
 int count_words(char *str){
   int cw = 0;
   
-  for(int i = 0; str[i] != '\0'; i++){
-    if(str[i] == ' ' && str[i-1] != ' '){
+  while(*str != '\0'){
+    str = word_start(str);
+    str = word_terminator(str);
       cw++;
-    }
+    
   }
   return cw;
 }
@@ -64,52 +63,40 @@ char *copy_str(char *inStr, short len){
 }
 
 char **tokenize(char* str){
-
   int cw = count_words(str);
-  char** arr = (char**)malloc(sizeof(char) * cw); 
-  char temp;
-  int a = 0;
-  int b = 0;
-  while(str[a] != '\0'){
-      a++;      
-      }
-  for(int i = 0; i < a; i++){
-    if(i == 0){
-      arr[b] = &str[i];
-      temp = str[i]; 
-      b++;
-   }
-    else{
-      if(space_char(str[i])){
-	temp = str[i];
-	str[i] = '\0';
-      }
-      else if(non_space_char(str[i]) && space_char(temp)){
-	arr[b] = &str[i];
-	temp = str[i];
-	b++;
-      }     
-    }
+  char** arr = (char**)malloc(sizeof(char) * cw+1);
+  int i;
+
+  for(i = 0;i < cw ;i++){
+    char *temp = word_start(str);
+    str = word_terminator(temp);
+    arr[i] = copy_str(temp,str-temp);
+    
   }
-  return arr;
+  arr[i] = '\0';
+
+ return arr;
 }
 
 
 
 void print_tokens(char **tokens){
-   for(int i = 0;*tokens[i] != '\0';i++){
-     printf("%s\n",tokens[i]);
+  int a = 1;
+  for(int i = 0;tokens[i] != 0;i++){
+    printf("\ntoken[%d]: %s\n",a,tokens[i]);
+    a++;
     }
 }
 
 
 void free_tokens(char **tokens){
-  char *token = tokens[0];
-  for(int i = 0; token[i] != '\0'; i++){
-    free(tokens[i]);
+  char **temp = tokens;
+  while(*temp != NULL){
+    free(*temp);
+    temp++;
   }
   free(tokens);
-  printf("Memory is free");
+  printf("\nMemory is free\n");
 }
 
 

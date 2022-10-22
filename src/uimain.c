@@ -2,39 +2,40 @@
 #include <stdlib.h>
 #include "tokenizer.h"
 #include "history.h"
-
+#define MAX 100
 int main(){
-  //puts("Welcome to the tokenizer");
-  //char test[] = "hello world string";
-  //char *test2 = test;
-  //char **str1 = tokenize(test2);
-  //  print_tokens(str1);
-  // free_tokens(str1);
+  puts("Welcome to the tokenizer");
   List *h = init_history();
-  // for(int i = 0; *str1[0] != '\0'; i++){
-  // add_history(h,str1[i]);
-  //}
-  //print_history(h);
-
+  char **tokens;
+  char str[MAX];
+  char c = '0';
   while(1) {
-    fputs("Select what action to do or 'q' to quit\n> ", stdout);
-    fflush(stdout);
-    int c;
-    while ((c = getchar()) == '\n'); 
+    printf("\nInsert t to tokenize, h to print the history, ! plus the # of the index or q to quit\n");
+    fgets(str,MAX,stdin);
+    c = *str;
     switch(c){
-    case 'a':
-    add_history(h, in);
+    case 't':
+      printf("\nEnter a string: \n");
+      fgets(str,MAX,stdin);      
+      tokens = tokenize(str);
+      print_tokens(tokens);
+      add_history(h,str);
     break;
     case 'h':
       print_history(h);
       break;
-  case 'q':
+    case 'q':
     return 0;
     break;
     default:
-      printf("Not a valid input \n");
+      break;
     }
-  }
+    if(str[0]== '!'){
+      int a = atoi(str+1);
+      char *hh = get_history(h,a);
+      printf("\n%s",hh);    
+    }
+    }
  
   
   return 0;
