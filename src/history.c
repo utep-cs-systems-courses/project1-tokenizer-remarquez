@@ -27,13 +27,14 @@ void add_history(List *list, char *str){
    }
    else {
      Item *temp = list->root;
-     
+     int id = temp->id;
      while(temp->next != NULL){
-       nn->id += 1;
+       id += 1;
        temp = temp->next;
      }
+     id++;
      temp->next = nn;
-     nn->id += 1;
+     nn->id = id;
    }
 }
 

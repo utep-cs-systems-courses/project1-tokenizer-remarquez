@@ -33,7 +33,8 @@ int main(){
     if(str[0]== '!'){
       int a = atoi(str+1);
       char *hh = get_history(h,a);
-      printf("\n%s",hh);    
+      printf("\n%s",hh);
+      printf("%d",a);
     }
     }
  
